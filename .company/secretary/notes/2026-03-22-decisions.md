@@ -11,3 +11,10 @@ date: "2026-03-22"
 - **終わりの挨拶**（お疲れ様・おやすみ等） → 変更確認 → コミットメッセージ提案 → `git push`
 - ブランチは `main` 一本、force push 禁止
 - 反映ファイル: `.company/RULES.md`、`antigravity/system_instructions.md`
+
+## [23:15] Workout Tracker アーキテクチャ刷新の決定
+
+- **内容**: 新アーキテクチャ要件定義書（最終版）を正式採用。
+- **背景**: 日々のトレーニングメニュー（ルーティン）管理の強化と、実行フローの改善。
+- **実装計画**: 2026-03-28以降に段階的に実装。
+- **反映ファイル**: `.company/engineering/docs/spec.md`
