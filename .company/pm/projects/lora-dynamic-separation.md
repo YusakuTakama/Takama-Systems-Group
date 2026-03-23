@@ -1,6 +1,8 @@
 ---
 project: lora-dynamic-separation
-status: in-progress
+status: review
+department: lab
+summary: 複数LoRA動的分離の研究（考察完了：既存の継続学習アプローチは中止、別タスク探索へ）
 created: 2026-03-22
 ---
 
