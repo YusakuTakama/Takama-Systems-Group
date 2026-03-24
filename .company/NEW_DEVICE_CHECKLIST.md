@@ -89,23 +89,12 @@
 
 ---
 
+---
+
 ### 4. その他確認事項
 
 - [ ] `credentials/gcp-oauth.keys.json` が OneDrive 経由で同期されているか確認
-- [ ] **SSH ホストキーの登録** (初回接続時のプロンプト回避)
-  ```bash
-  ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
-  ```
-- [ ] **Git 認証の確認**
-  ```bash
-  ssh -T git@github.com
-  # "Hi [username]! You've successfully authenticated..." と出ればOK
-  ```
-- [ ] **リモート URL の SSH 化** (HTTPS だとトークン入力を求められてエージェントが止まるため)
-  ```bash
-  git remote set-url origin git@github.com:YusakuTakama/Takama-Systems-Group.git
-  ```
-- [ ] `git pull` がパスワードプロンプトなしに実行できるか確認
+- [ ] OneDrive の同期が「完了」になっているかステータスバーを確認
 
 ---
 
@@ -116,8 +105,8 @@
 | `exec: "npx": not found` | npx が PATH にない | Node.js をインストール し、絶対パスを config に記述 |
 | `exec: "uvx": not found` | uv が PATH にない | uv をインストールし、絶対パスを config に記述 |
 | `env: node: No such file or directory` | PATH に node bin が含まれていない | env の PATH に node のディレクトリを追加 |
-| `git pull` が止まる | SSH 認証かパスワード要求 | SSH Key を設定、またはログイン情報を keychain に保存 |
 | 認証ファイルが見つからない | ファイルパスに余分なスペースや Windows パス | パスを正確にコピーし、末尾スペースを除去 |
+| 同期が反映されない | OneDrive が一時停止中など | OneDrive を再起動・同期再開する |
 
 ---
 
