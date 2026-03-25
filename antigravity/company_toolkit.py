@@ -28,9 +28,9 @@ COMPANY_RULES_MD = """# Company - 仮想組織管理システム
 
 ```
 .company/
-├── RULES.md
+├── CLAUDE.md
 └── secretary/
-    ├── RULES.md
+    ├── CLAUDE.md
     ├── inbox/
     ├── todos/
     └── notes/
@@ -251,7 +251,7 @@ def setup_company(business_type: str, goals: str, base_dir: str = ".company"):
     os.makedirs(os.path.join(secretary_dir, "todos"), exist_ok=True)
     os.makedirs(os.path.join(secretary_dir, "notes"), exist_ok=True)
 
-    # Write root RULES.md
+    # Write root CLAUDE.md
     today = datetime.now().strftime("%Y-%m-%d")
     root_content = COMPANY_RULES_MD.format(
         business_type=business_type,
@@ -260,11 +260,11 @@ def setup_company(business_type: str, goals: str, base_dir: str = ".company"):
         additional_departments_tree="",
         department_table_rows=""
     )
-    with open(os.path.join(base_dir, "RULES.md"), "w", encoding="utf-8") as f:
+    with open(os.path.join(base_dir, "CLAUDE.md"), "w", encoding="utf-8") as f:
         f.write(root_content)
 
-    # Write secretary RULES.md
-    with open(os.path.join(secretary_dir, "RULES.md"), "w", encoding="utf-8") as f:
+    # Write secretary CLAUDE.md
+    with open(os.path.join(secretary_dir, "CLAUDE.md"), "w", encoding="utf-8") as f:
         f.write(SECRETARY_RULES_MD)
 
     # Write today's TODO
@@ -301,12 +301,12 @@ def add_department(department_id: str, base_dir: str = ".company"):
     for sub in subfolders:
         os.makedirs(os.path.join(dept_dir, sub), exist_ok=True)
 
-    # Write department RULES.md
-    with open(os.path.join(dept_dir, "RULES.md"), "w", encoding="utf-8") as f:
+    # Write department CLAUDE.md
+    with open(os.path.join(dept_dir, "CLAUDE.md"), "w", encoding="utf-8") as f:
         f.write(rules_md_content)
 
-    # Note: Modifying the existing root RULES.md to inject the new department
-    root_md_path = os.path.join(base_dir, "RULES.md")
+    # Note: Modifying the existing root CLAUDE.md to inject the new department
+    root_md_path = os.path.join(base_dir, "CLAUDE.md")
     if os.path.exists(root_md_path):
         with open(root_md_path, "r", encoding="utf-8") as f:
             content = f.read()
