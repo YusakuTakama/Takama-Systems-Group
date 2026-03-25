@@ -1,2 +1,22 @@
 # 認証情報（秘密情報）
 credentials/
+
+# Python / Research
+**/__pycache__/
+**/.ipynb_checkpoints/
+**/.venv/
+**/.pytest_cache/
+*.pyc
+
+# Data & Weights (Huge binaries should not be in Git/OneDrive)
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.model
+*.npy
+*.npz
+
+# Server Specific
+.vscode/
+.DS_Store

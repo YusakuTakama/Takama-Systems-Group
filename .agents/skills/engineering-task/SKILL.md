@@ -1,5 +1,5 @@
 ---
-description: Handles engineering tasks for personal development projects (e.g., Workout Tracker). Triggered by requests for code fixes, feature additions, bug reports, UI tweaks, or refactoring. Use this skill when the user says things like「〇〇を直して」「〇〇機能を追加して」「UIを変えたい」「バグがある」. Coordinates the full lifecycle: requirement clarification → implementation → browser verification → documentation update → Git push.
+description: Handles engineering tasks for personal development projects (e.g., Workout Tracker). Coordinates the full lifecycle: requirement clarification → implementation → user review → documentation update → Git push. Use this skill for any code fixes, feature additions, or UI tweaks.
 ---
 
 # Engineering Task Skill（エンジニアリング・タスクスキル）
@@ -31,7 +31,7 @@ description: Handles engineering tasks for personal development projects (e.g., 
 ユーザーの許可を得た後、定義書の内容に基づき実装を行う。
 
 - **1ファイルずつ、論理的な順番で変更する**。依存するファイルから順に変更する。
-- `replace_file_content` または `multi_replace_file_content` を使い、的確なターゲット行指定で編集する。
+- `replace_file_content` または `multi_replace_file_content` を使い、的なターゲット行指定で編集する。
 - 変更後は `view_file` で実際のコードを再確認し、意図通りに適用されたか必ずチェックする。
 
 #### 開発サーバーの確認
@@ -45,7 +45,21 @@ cd "<project_root>" && npm run dev
 
 ---
 
-### Phase 3: Browser Verification（ブラウザ検証 - 原則スキップ）
+### Phase 3: User Review & Refinement（ユーザー確認と修正）
+
+実装完了後、**まずはユーザーに結果を報告し、ユーザー自身による動作チェックを依頼する。**
+
+1. **完了報告**: 実装が完了したことをユーザーに伝え、確認を促す。
+2. **フィードバックの受領**: ユーザーから「ここが動かない」「ここをもう少し直して」などの指摘を受ける。
+3. **再実装のループ**: 指摘事項がある場合は Phase 2 に戻り、修正を行う。
+4. **通過条件**: **ユーザーから「OK」「これで大丈夫」「完璧」などの承認を得るまで、Phase 4 以降（ドキュメント更新・Push）に進んではならない。**
+
+> [!IMPORTANT]
+> 「一度の実装で完璧に仕上がることは稀である」という前提に立ち、ユーザーとの対話を通じてクオリティを磨き上げるフェーズ。
+
+---
+
+### Phase 4: Browser Verification（ブラウザ検証 - 原則スキップ）
 
 **本フェーズは原則としてスキップする。** ユーザーから「ブラウザで確認して」「動作させてみて」と明示的な指示があった場合のみ、`browser_subagent` を起動する。
 
@@ -62,9 +76,9 @@ cd "<project_root>" && npm run dev
 
 ---
 
-### Phase 4: Documentation Update（ドキュメント更新）
+### Phase 5: Documentation Update（ドキュメント更新）
 
-実装が完了（または検証が完了）したら、以下のファイルを**必ず**更新する。
+**ユーザーの承認（Phase 3）を得た後**、以下のファイルを更新する。
 
 | ファイル | 更新内容 |
 |---|---|
@@ -76,7 +90,7 @@ cd "<project_root>" && npm run dev
 
 ---
 
-### Phase 5: Git Push（バージョン管理）
+### Phase 6: Git Push（バージョン管理）
 
 ユーザーから「push して」という指示を受けた場合のみ実行する。
 
@@ -89,7 +103,7 @@ git -C "<absolute_project_root>" push
 ```
 
 > [!IMPORTANT]
-> 「実装が完了した」と判断した時点（Phase 2/3の終了時）で、ユーザーから言われなくても **Phase 4（ドキュメント更新）を自律的に開始する** こと。これを忘れると Skill の価値が半減する。
+> ユーザーの承認（Phase 3）を得た時点で、自律的に Phase 5（ドキュメント更新）を開始すること。
 
 ---
 
