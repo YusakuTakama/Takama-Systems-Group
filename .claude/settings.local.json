@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/yusaku/.claude/plugins/cache/cc-company/company/2.0.0/**)",
+      "Bash(mkdir -p \"/mnt/c/Users/yusak/OneDrive - NITech/Antigravity/Takama-Systems-Group/.claude/skills/meeting-minutes\")",
+      "Bash(mkdir -p \"/mnt/c/Users/yusak/OneDrive - NITech/Antigravity/Takama-Systems-Group/.claude/skills/engineering-task\")",
+      "Bash(cp:*)",
+      "Bash(cp /mnt/c/Users/yusak/.ssh/id_ed25519 ~/.ssh/)",
+      "Bash(cp /mnt/c/Users/yusak/.ssh/id_ed25519.pub ~/.ssh/)",
+      "Bash(chmod 600 ~/.ssh/id_ed25519)",
+      "Bash(chmod 644 ~/.ssh/id_ed25519.pub)",
+      "Bash(ssh -T git@github.com)"
+    ]
+  }
+}
