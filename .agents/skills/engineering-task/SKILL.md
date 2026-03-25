@@ -81,10 +81,15 @@ cd "<project_root>" && npm run dev
 ユーザーから「push して」という指示を受けた場合のみ実行する。
 
 ```bash
-git -C "<project_root>" add .
-git -C "<project_root>" commit -m "<type>: <summary of changes>"
-git -C "<project_root>" push
+# プロジェクトルートの【絶対パス】を明示的に指定して実行することを基本とする。
+# ※ワークスペース外（OneDrive等）で絶対パスが拒否される場合は、相対パス（../～）による迂回を検討する。
+git -C "<absolute_project_root>" add .
+git -C "<absolute_project_root>" commit -m "<type>: <summary of changes>"
+git -C "<absolute_project_root>" push
 ```
+
+> [!IMPORTANT]
+> 「実装が完了した」と判断した時点（Phase 2/3の終了時）で、ユーザーから言われなくても **Phase 4（ドキュメント更新）を自律的に開始する** こと。これを忘れると Skill の価値が半減する。
 
 ---
 
