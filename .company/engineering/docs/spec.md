@@ -1,6 +1,6 @@
 # Workout Tracker — Feature Specification
 
-> **Version:** 2026-03 (Updated: 2026-03-23)
+> **Version:** 2026-03 (Updated: 2026-03-25)
 > **Platform:** Web App (Next.js / PWA)  
 > **Data Storage:** `localStorage` (Keys: `workout_tracker_data`, `routinesData`, `workout_tracker_home_expanded`)
 
@@ -121,7 +121,10 @@
 ## 6. 種目詳細画面 (`/exercise/[id]`)
 
 ### 6.1 通常閲覧モード
-- セットの入力（重量・レップ数）、メモの編集、進捗グラフ（Recharts）の表示。
+- **Reps入力 (v2.5)**: `React Portal` を用いたカスタム・オーバーレイ・ピッカー。
+  - **ページジャンプ防止**: `scrollIntoView` を廃止し、`.scrollTop` による直接制御に切り替えることで、メインページのスクロールが勝手に動く問題を解決。
+  - **インテリジェント・スクロール**: `useLayoutEffect` により展開時に選択中の値を即時中央表示。
+  - **サイレント・オートセーブ**: ステップごとの手動保存ボタンを廃止し、入力変更時にバックグラウンドで即時永続化。通知（トースト）を排したミニマルなUX。
 - **スワイプ削除**: セット行を左スワイプして削除可能。
 - **スマート入力**: 重量入力時に `kg` 単位が数値幅に合わせて動的に右隣へ追従。
 
