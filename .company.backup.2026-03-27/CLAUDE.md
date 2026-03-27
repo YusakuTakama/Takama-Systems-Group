@@ -10,32 +10,12 @@
 
 ```
 .company/
-├── CLAUDE.md
-├── docs/                        # ドキュメント（移行レポート、セットアップガイド等）
-├── templates/                   # テンプレート集
-├── secretary/                   # 秘書室（常設）
-│   ├── CLAUDE.md
-│   ├── inbox/
-│   ├── todos/
-│   └── notes/
-│       └── brainstorm/         # 壁打ち（一時）
-├── lab/                        # 研究所
-│   ├── CLAUDE.md
-│   └── projects/
-│       └── <project-name>/     # プロジェクトごとにフォルダ
-│           ├── README.md       # プロジェクト概要（frontmatter含む）
-│           ├── specs/          # 要件定義書
-│           ├── experiments/    # 実験ログ
-│           ├── meetings/       # MTG記録
-│           └── implementation/ # 実装完了報告
-└── engineering/                # 個人開発
-    ├── CLAUDE.md
-    └── projects/
-        └── <project-name>/     # プロジェクトごとにフォルダ
-            ├── README.md
-            ├── specs/
-            ├── implementation/
-            └── debug-log/
+├── RULES.md
+└── secretary/
+    ├── RULES.md
+    ├── inbox/
+    ├── todos/
+    └── notes/
 ```
 
 
@@ -43,9 +23,11 @@
 
 | 部署 | フォルダ | 役割 |
 |------|---------|------|
-| 研究所 (Lab) | lab | 研究活動全般（CV/ML）。プロジェクト管理、要件定義、実験ログ、MTG記録、実装報告をすべて統合管理。 |
-| 開発 (Engineering) | engineering | 研究「以外」の個人開発やシステム開発。プロジェクト単位で管理。 |
-| 秘書室 (Secretary) | secretary | 窓口・相談役。TODO管理、壁打ち、メモ。常設。 |
+| 研究所 (Lab) | lab | 研究活動全般（CV/ML）。研究用の開発や実験ログもここに含まれる。 |
+| 開発 | engineering | 研究「以外」の個人開発やシステム開発の技術設計・デバッグログ。 |
+| リサーチ | research | 市場調査、競合分析、技術調査。 |
+| PM | pm | プロジェクト進捗、マイルストーン、チケット管理。 |
+| 秘書室 | secretary | 窓口・相談役。TODO管理、壁打ち、メモ。常設。 |
 
 
 ## 運営ルール
@@ -76,7 +58,7 @@
 **【必読ファイルチェックリスト】（漏れ禁止・記憶に頼ることは禁止）**
 1. `secretary/todos/YYYY-MM-DD.md` — 今日のTODO（全件）
 2. `secretary/inbox/` — ディレクトリ一覧のみ（件数確認）
-3. `lab/projects/*/README.md` および `engineering/projects/*/README.md` 内の**先頭frontmatter**（`summary` と `status` のみ読む）
+3. `pm/projects/` 内の**全プロジェクトファイルの先頭frontmatter**（`summary` と `status` のみ読む）
 
 > **【frontmatterルール】**
 > - プロジェクトの進捗を更新した際は、必ず同ファイルの `summary` も更新すること
@@ -167,25 +149,6 @@ Inbox: Z件 未整理
 ### 専門業務の自動化 (Skills)
 - 複雑なワークフロー（MTG議事録作成、ダッシュボード表示など）は、`.agents/skills/` 配下の専門スキルに委ねる。
 - 秘書はこれらのスキルを状況に応じて呼び出し、一貫性のある処理を行う。
-
-### プロジェクトの粒度
-
-#### プロジェクト vs サブタスク の判断基準
-
-**プロジェクトとして独立させる条件**（いずれか1つ以上）:
-- 単体で論文1本書けるレベルの独立性がある
-- 他の研究でも再利用される汎用ツール/ライブラリになる
-- 別ドメイン（RL、NLPなど）への応用研究になる
-- 期間が2ヶ月以上、独立した進捗管理が必要
-
-**サブタスク/マイルストーンとして管理する条件**:
-- 親プロジェクトのゴール達成のための手段・実験・分析
-- 同じMTGから派生した関連タスク
-- 親プロジェクトと成果を共有する（例: 同じ論文に含まれる）
-
-**運用**:
-- 最初は親プロジェクト内で管理（`specs/`, `experiments/`, `implementation/`）
-- 独立性が明確になったら、その時点で切り出す
 
 ### コンテンツルール
 1. 迷ったら `secretary/inbox/` に入れる

@@ -10,9 +10,5 @@
 - 解決したデバッグログには「再発防止策」を追記する
 
 ## フォルダ構成
-- `projects/` - プロジェクトごとに1フォルダ
-  - `<project-name>/`
-    - `README.md` - プロジェクト概要（frontmatter含む）
-    - `specs/` - 要件定義書（企業レベル）
-    - `implementation/` - 実装完了報告
-    - `debug-log/` - デバッグ・バグ調査ログ
+- `docs/` - 技術ドキュメント・設計書
+- `debug-log/` - デバッグ・バグ調査ログ

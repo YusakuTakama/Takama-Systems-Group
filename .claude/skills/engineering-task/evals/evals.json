@@ -1,0 +1,56 @@
+{
+  "skill_name": "engineering-task",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Workout Trackerにエクササイズ履歴表示機能を追加して。ユーザーが過去にやったエクササイズの履歴を一覧で見れるようにしたい。",
+      "expected_output": "プロジェクト情報確認 → コンテキスト読み込み → タスク複雑度判定（中規模） → 簡易版要件定義書作成（5セクション） → ユーザー承認 → 実装 → ユーザー確認 → ドキュメント更新（要件定義書完了マーク、実装報告、README frontmatter更新、マイルストーン更新）",
+      "files": [],
+      "assertions": [
+        {"name": "context_loaded", "description": "README.md, specs/, implementation/ を自動読み込み"},
+        {"name": "complexity_judged_correctly", "description": "中規模タスクと判定（3-5ファイル変更）"},
+        {"name": "spec_created_5_sections", "description": "簡易版要件定義書（5セクション）を作成"},
+        {"name": "user_approval_required", "description": "ユーザーの明示的承認を待つ"},
+        {"name": "implementation_order_correct", "description": "型定義 → ユーティリティ → コアロジック → UI → 統合の順"},
+        {"name": "success_criteria_checked", "description": "Phase 3 で Success Criteria を確認"},
+        {"name": "spec_status_completed", "description": "要件定義書の status を completed に更新"},
+        {"name": "implementation_report_created", "description": "implementation/ に実装報告を作成"},
+        {"name": "readme_frontmatter_updated", "description": "README.md の summary と last_updated を更新"},
+        {"name": "milestone_updated", "description": "マイルストーンに新タスクを追加または完了マーク"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "ログインボタンが反応しないバグを直して。クリックしても何も起こらない。",
+      "expected_output": "プロジェクト情報確認 → コンテキスト読み込み → タスク複雑度判定（軽量） → 簡易プラン提示 → ユーザー承認 → 実装 → ユーザー確認 → ドキュメント更新（実装報告、debug-log作成（Engineeringの場合）、README frontmatter更新）",
+      "files": [],
+      "assertions": [
+        {"name": "context_loaded", "description": "README.md, debug-log/ を自動読み込み"},
+        {"name": "complexity_judged_lightweight", "description": "軽量タスクと判定（1-2ファイル変更）"},
+        {"name": "simple_plan_presented", "description": "簡易プラン提示（ファイル作成なし）"},
+        {"name": "user_approval_required", "description": "ユーザーの明示的承認を待つ"},
+        {"name": "implementation_completed", "description": "バグ修正を実装"},
+        {"name": "implementation_report_created", "description": "implementation/ に実装報告を作成"},
+        {"name": "debug_log_created", "description": "debug-log/ にバグ記録を作成（Engineering の場合）"},
+        {"name": "readme_frontmatter_updated", "description": "README.md の summary と last_updated を更新"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "LoRAの直交性を可視化するスクリプトを作って。2つのLoRAの特異値ベクトル間のコサイン類似度をヒートマップで表示したい。再現性も重要。",
+      "expected_output": "プロジェクト情報確認 → コンテキスト読み込み → タスク複雑度判定（中規模） → 簡易版要件定義書作成（5セクション） → ユーザー承認 → 実装（Lab特有: 乱数シード明記、ハイパーパラメータ明記、ログ出力充実） → ユーザー確認 → ドキュメント更新（要件定義書完了マーク、実装報告、README frontmatter更新、マイルストーン更新）",
+      "files": [],
+      "assertions": [
+        {"name": "context_loaded", "description": "README.md, specs/, experiments/ を自動読み込み"},
+        {"name": "complexity_judged_correctly", "description": "中規模タスクと判定"},
+        {"name": "spec_created_5_sections", "description": "簡易版要件定義書（5セクション）を作成"},
+        {"name": "lab_specific_reproducibility", "description": "乱数シード・ハイパーパラメータを明記（Lab特有）"},
+        {"name": "lab_specific_logging", "description": "実験の進捗ログ出力を充実（Lab特有）"},
+        {"name": "visualization_generated", "description": "ヒートマップ可視化を実装"},
+        {"name": "spec_status_completed", "description": "要件定義書の status を completed に更新"},
+        {"name": "implementation_report_created", "description": "implementation/ に実装報告を作成"},
+        {"name": "readme_frontmatter_updated", "description": "README.md の summary と last_updated を更新"}
+      ]
+    }
+  ]
+}

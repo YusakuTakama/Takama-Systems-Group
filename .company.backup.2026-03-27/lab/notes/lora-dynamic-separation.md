@@ -68,7 +68,12 @@
 - [x] 「0.9999 vs 1」の理論的根拠調査 (2026-03-25)
 
 ### 次のアクション
-- [ ] ヒートマップ可視化の実装（2個のLoRAペアの主ベクトル間角度）
+- [x] ヒートマップ可視化の実装（2個のLoRAペアの主ベクトル間角度） | 完了: 2026-03-26
+  - ノートブック作成: `/mnt/HDD18TB/takama/2025_10_takama_Proj_CL/analysis/lora_heatmap_visualization.ipynb`
+  - 基本関数実装完了（SVD分解、角度行列計算、ヒートマップ描画）
+  - 図の保存先: `figures/heatmaps/` および `.company/lab/figures/heatmaps/`
+- [ ] ヒートマップのテストデータでの動作確認（次のステップ）
+- [ ] 実験データ（Dual Optimizer / λブースト）での可視化
 - [ ] 継続学習での可視化プロット（学習ステップに伴うヒートマップの変化）
 - [ ] 損失を「1」にする手法の探索
 - [ ] 損失が1以外でも分離が意味を持つ手法の調査（エゴクロス等）
@@ -137,3 +142,65 @@
 - 「λブースト（λ=10,000）」モデル: 指標1.0・忘却なし
 
 → この2つを比較解析することで原因特定が可能な可能性あり
+
+---
+
+## チェックポイントの構造（2026-03-26判明）
+
+### 保存形式の理解
+
+**重要な発見**:
+- `task_19.pth` という**1つのチェックポイント**に、**task 0〜19の全20個のLoRA**が含まれている
+- 各タスクのLoRAパラメータは**ModuleList**として並列に保存されている
+
+### InfLoRAb5の実装（vit_inflorab5.py）
+
+```python
+class Attention_LoRA(nn.Module):
+    def __init__(self, dim, num_heads=8, ..., r=64, n_tasks=10):
+        ...
+        # 各タスクごとにLoRAのペアを保持
+        self.lora_A_k = nn.ModuleList([nn.Linear(dim, r, bias=False) for _ in range(n_tasks)])
+        self.lora_B_k = nn.ModuleList([nn.Linear(r, dim, bias=False) for _ in range(n_tasks)])
+        self.lora_A_v = nn.ModuleList([nn.Linear(dim, r, bias=False) for _ in range(n_tasks)])
+        self.lora_B_v = nn.ModuleList([nn.Linear(r, dim, bias=False) for _ in range(n_tasks)])
+```
+
+### チェックポイント内のキー構造（推定）
+
+```
+state_dict = {
+    "blocks.0.attn.lora_A_k.0.weight": ...,  # Task 0のlora_A_k
+    "blocks.0.attn.lora_B_k.0.weight": ...,  # Task 0のlora_B_k
+    "blocks.0.attn.lora_A_v.0.weight": ...,  # Task 0のlora_A_v
+    "blocks.0.attn.lora_B_v.0.weight": ...,  # Task 0のlora_B_v
+
+    "blocks.0.attn.lora_A_k.1.weight": ...,  # Task 1のlora_A_k
+    "blocks.0.attn.lora_B_k.1.weight": ...,  # Task 1のlora_B_k
+    ...
+
+    "blocks.0.attn.lora_A_k.19.weight": ..., # Task 19のlora_A_k
+    "blocks.0.attn.lora_B_k.19.weight": ..., # Task 19のlora_B_k
+    ...
+}
+```
+
+### ヒートマップ可視化への影響
+
+**正しい実装方針**:
+1. **1つのチェックポイント**（例: `task_19.pth`）を読み込む
+2. 同じ層（例: `blocks.0.attn`）から**異なるタスクID**のlora_B_kを抽出
+   - Task 0: `state_dict["blocks.0.attn.lora_B_k.0.weight"]`
+   - Task 1: `state_dict["blocks.0.attn.lora_B_k.1.weight"]`
+3. これら2つのLoRA_B行列の列空間の基底ベクトル間の角度をヒートマップ化
+
+**間違った理解（修正済み）**:
+- ~~異なるチェックポイント（`task_0.pth` vs `task_1.pth`）を比較する~~ ❌
+- 正しくは同じチェックポイント内の異なるタスクを比較 ✅
+
+### 参考コード
+
+研究プロジェクト内の該当ファイル:
+- モデル定義: `/mnt/HDD18TB/takama/2025_10_takama_Proj_CL/models/vit_inflorab5.py:225-250`
+- 学習ループ: `/mnt/HDD18TB/takama/2025_10_takama_Proj_CL/methods/inflorab5_domain.py:112-127`
+- チェックポイント保存: `/mnt/HDD18TB/takama/2025_10_takama_Proj_CL/trainer.py:203-206`

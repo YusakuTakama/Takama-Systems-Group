@@ -9,13 +9,12 @@
 - 実験ログや結果などの記録もここですべて管理する
 
 ## フォルダ構成
-- `projects/` - プロジェクトごとに1フォルダ
-  - `<project-name>/`
-    - `README.md` - プロジェクト概要（frontmatter含む）
-    - `specs/` - 要件定義書（企業レベル）
-    - `experiments/` - 実験ログ
-    - `meetings/` - MTG記録（生データ+サマリー統合）
-    - `implementation/` - 実装完了報告
+- `dev/` - 研究用の開発に関連する技術メモや設計
+- `experiments/` - 実験の記録と結果
+- `notes/` - 研究ノートやアイデア
+  - `notion-imports/` - NotionからエクスポートしたMDファイルの受け入れ先
+- `figures/` - 実験結果の可視化図（研究プロジェクトと同期）
+  - `heatmaps/` - ヒートマップ等の可視化画像
 
 ## コード管理場所
 
@@ -23,19 +22,14 @@
 
 - **メインリサーチディレクトリ**: `/mnt/HDD18TB/takama/2025_10_takama_Proj_CL`
 
-## 研究プロジェクトの管理
+## 研究プロジェクトファイルの役割分担
 
-各研究プロジェクトは `lab/projects/<project-name>/` に1つのフォルダとして管理される。
+各研究プロジェクトには **2種類のファイル** が存在する。それぞれの役割を明確に区別すること。
 
-- **README.md**: プロジェクト概要、ゴール、マイルストーン、実験結果サマリー（frontmatter含む）
-- **specs/**: 要件定義書（企業レベルのテンプレート使用）
-- **experiments/**: 実験ログ
-- **meetings/**: MTG記録（生データ+サマリーを1ファイルに統合）
-- **implementation/**: 実装完了報告
-
-**Single Source of Truth**:
-- プロジェクトの情報は `lab/projects/<project>/README.md` に集約
-- `secretary/notes/` の壁打ちメモは一時的なもの。固まったら `specs/` に昇格
+| ファイル | 場所 | 主な用途 |
+|---|---|---|
+| **プロジェクト管理ファイル** | `pm/projects/<project>.md` | 進捗管理。frontmatter（status/summary）・マイルストーンチェックリストが中心。ダッシュボードの情報源。 |
+| **研究コンテキストノート** | `lab/notes/<project>.md` | 研究内容の記録。実験結果の詳細・考察・ディスカッションメモ・現在のStatus。 |
 
 ## 研究進捗報告 (MTG等)
 - MTG後の議事録作成、プロジェクト更新、タスク抽出は、専用の **Meeting Minutes (進捗報告) スキル** を使用して実行する。

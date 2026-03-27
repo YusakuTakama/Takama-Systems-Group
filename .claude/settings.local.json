@@ -9,7 +9,26 @@
       "Bash(cp /mnt/c/Users/yusak/.ssh/id_ed25519.pub ~/.ssh/)",
       "Bash(chmod 600 ~/.ssh/id_ed25519)",
       "Bash(chmod 644 ~/.ssh/id_ed25519.pub)",
-      "Bash(ssh -T git@github.com)"
+      "Bash(ssh -T git@github.com)",
+      "Read(//mnt/HDD18TB/takama/**)",
+      "Read(//home/takama/**)",
+      "Bash(chmod +x /mnt/HDD18TB/takama/2025_10_takama_Proj_CL/analysis/lora_viz/batch_generate.py)",
+      "Bash(chmod +x /mnt/HDD18TB/takama/2025_10_takama_Proj_CL/analysis/lora_viz/generate_summary_dashboard.py)",
+      "Bash(python batch_generate.py --test)",
+      "Bash(python3 batch_generate.py --test)",
+      "Bash(tree -L 2 lora_viz/ -I '__pycache__')",
+      "Bash(tree -L 4 .company/ -I '__pycache__|*.pyc')",
+      "Bash(mkdir -p .company/lab/projects/lora-dynamic-separation/{specs,experiments,meetings,implementation})",
+      "Bash(tree -L 4 .company/ -I '__pycache__|*.pyc|.company.backup*')",
+      "Bash(tree -L 3 .company/ -I '__pycache__|*.pyc|.company.backup*')",
+      "Bash(cat ~/.config/Claude/claude_desktop_config.json)",
+      "Bash(cat ~/Library/Application Support/Claude/claude_desktop_config.json)",
+      "SlashCommand(/skill-creator)",
+      "Bash(python -m skill-creator.scripts.package_skill meeting-minutes)",
+      "Bash(python3 -m skill-creator.scripts.package_skill meeting-minutes)",
+      "Bash(python3 scripts/package_skill.py /mnt/HDD18TB/takama/Takama-Systems-Group/.claude/skills/meeting-minutes)",
+      "Bash(tar -czf meeting-minutes.skill meeting-minutes/SKILL.md meeting-minutes/evals/)",
+      "Bash(tar -czf engineering-task.skill engineering-task/SKILL.md engineering-task/evals/)"
     ]
   }
 }
