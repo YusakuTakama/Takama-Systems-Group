@@ -2,7 +2,7 @@
 project: lora-dynamic-separation
 status: in-progress
 department: lab
-summary: 複数LoRA動的分離の研究（2026-03-27 ヒートマップ可視化の論理的定式化を完了し、CD/WCDのパターンの違いを識別可能に）
+summary: 複数LoRA動的分離の研究（明日: 非直交分離の応用調査・エゴクロス等のDeepresearch内容をNotion集約予定）
 created: 2026-03-22
 last_updated: 2026-03-27
 ---
